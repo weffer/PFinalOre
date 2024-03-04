@@ -1,0 +1,42 @@
+header {
+  background-image: url("../../assets/img/header.webp");
+  background-size: cover;
+  background-position: 50%;
+  background-size: cover;
+}
+
+.logo {
+  text-decoration: none;
+  color: #00111e;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.logo:hover {
+  color: #cac94d;
+}
+
+.menu a:hover {
+  background-color: #cac94d;
+  color: white !important;
+}
+
+.productoPrincipal {
+  background-color: rgba(255, 255, 255, 0.6);
+  font-size: 20px !important;
+  color: #36516a;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.fw-back {
+  font-weight: 900;
+}
+
+#btn_prod {
+  transition: all 0.2s;
+}
+
+#btn_prod:hover {
+  transform: scale(1.1);
+}

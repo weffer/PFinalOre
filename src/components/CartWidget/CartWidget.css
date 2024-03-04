@@ -1,0 +1,23 @@
+#btnCarrito {
+  transition: all 0.3s;
+  position: relative;
+  display: inline-block;
+  margin: 5px;
+  color: black;
+}
+
+#btnCarrito:hover {
+  transform: scale(1.3);
+  color: #cac94d;
+}
+
+#cantidadCarrito {
+  position: absolute;
+  top: -8px; /* Ajusta la posición vertical según sea necesario */
+  right: -8px; /* Ajusta la posición horizontal según sea necesario */
+  background-color: red; /* Ajusta el color de fondo según sea necesario */
+  color: white; /* Ajusta el color del texto según sea necesario */
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px; /* Ajusta el tamaño de fuente según sea necesario */
+}
