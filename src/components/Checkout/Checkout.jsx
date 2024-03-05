@@ -127,14 +127,15 @@ const Checkout = () => {
                 <label htmlFor="creditCardTarjeta" className="form-label"
                   >Número de Tarjeta de Crédito</label
                 >
-                <input
-                  type="text"
-                  className="form-control"
-                  id="creditCardTarjeta"
-                  onChange={(e) => setTarjeta(e.target.value)}                  
-                  placeholder="1234 5678 9012 3456"
-                  required
-                />
+                <div className="input-group">
+                    <span className="input-group-text"><i className="bi bi-credit-card"></i></span>
+                    <input 
+                      type="text" 
+                      className="form-control" 
+                      id="creditCardTarjeta" 
+                      onChange={(e) => setTarjeta(e.target.value)}  
+                      placeholder="0000 0000 0000 0000"/>
+                </div>                
               </div>
               <div className="mb-3">
                 <label htmlFor="cardHolderTitular" className="form-label"

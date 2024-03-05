@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export function useProductCount({detail}) {  
    
-   const [ count, setCount ] = useState(0);
+   const [ count, setCount ] = useState(1);
 
    const handleIncrement = (event)=> {
      event.preventDefault();
@@ -13,7 +13,7 @@ export function useProductCount({detail}) {
 
    const handleDecrement = (event)=> {
      event.preventDefault();
-     if(count > 0)
+     if(count > 1)
       setCount(oldCount => oldCount - 1);
    }
     
