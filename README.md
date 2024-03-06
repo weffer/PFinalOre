@@ -43,3 +43,6 @@ Este proyecto permite simular una compra de productos de escritorio agregar dist
 ![alt text](chrome_GmuASoBdwR.png)
 ![alt text](chrome_OgGGeVibst.png)
 ![alt text](chrome_sn5zbwMHbK.png)
+
+## Gif de la aplicacion
+![alt text](ecommerce.gif)
