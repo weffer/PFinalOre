@@ -127,7 +127,7 @@ const Checkout = () => {
             ></button>
           </div>
           <div className="modal-body">            
-            <form onSubmit={handleSubmit} netlify>
+            <form onSubmit={handleSubmit} data-netlify="true">
               <div className="mb-3">
                 <label htmlFor="creditCardTarjeta" className="form-label"
                   >Número de Tarjeta de Crédito</label
