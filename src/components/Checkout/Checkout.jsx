@@ -85,6 +85,7 @@ const Checkout = () => {
 
             withReactContent(Swal).fire({
               title: <i>Gracias por su compra</i>,
+              allowOutsideClick: false,
               html: `Su Nro de Orden es : <strong>${docRef.id}</strong>`,              
               preConfirm: () => { 
                 window.location.href = '/';
@@ -107,6 +108,7 @@ const Checkout = () => {
       tabIndex="-1"
       aria-labelledby="paymentModalLabel"
       aria-hidden="true"
+      data-bs-backdrop="static"
     >
       <div className="modal-dialog">
         <div className="modal-content">

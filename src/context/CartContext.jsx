@@ -3,6 +3,10 @@ import {createContext, useEffect, useState} from "react";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
+import { toast } from 'react-toastify';
+
+import confetti from 'canvas-confetti'
+
 import { doc , getDoc } from "firebase/firestore";
 import { db } from "../firebase/config"
 
@@ -20,9 +24,39 @@ export const CartProvider = ({children}) => {
         const productIndex =cartItems.findIndex(item => item.id === detail.id);
         if(productIndex >= 0)
         {
+            const productoRef = doc(db, "productos", detail.id);
+            getDoc(productoRef).then((snapshot) => {
+                if(snapshot.exists()){
+                    const newProduct = [...cartItems];
+                    if(newProduct[productIndex].cantidad + count <= snapshot.data().stock)
+                    {
+                        newProduct[productIndex].cantidad += count;
+                        setCartItems(newProduct);
+                        confetti({
+                            particleCount: 100,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        });
+                        toast.success('¡Se agrego el producto con éxito!', { autoClose: 3000 });
+                    }else{
+                        withReactContent(Swal).fire({
+                            title: <i>Stock</i>,
+                            allowOutsideClick: false,
+                            html: `Producto sin Stock : <strong>${snapshot.data().nombre}</strong> </br> Stock maximo permitido: <strong>${snapshot.data().stock}</strong> </br>
+                                   Ya tienes agregado el producto <strong>${snapshot.data().nombre}</strong> en el carrito, con la cantidad de : <strong>${newProduct[productIndex].cantidad}</strong>.</br>
+                                   ${(snapshot.data().stock - (newProduct[productIndex].cantidad + count)) < 0 ? 'La cantidad perimitada para agregar es : <strong>' + (snapshot.data().stock - (newProduct[productIndex].cantidad)) + '</strong>' : '' } `
+                        })
+                    }
+                }
+            }).catch((error) => {
+                console.error("Error al obtener el documento:", error);
+            });
+
+            /*
             const newProduct = [...cartItems];
             newProduct[productIndex].cantidad += count;
             setCartItems(newProduct);
+            */
         }else{
             setCartItems(oldProduct => (
                 [
@@ -33,6 +67,12 @@ export const CartProvider = ({children}) => {
                     }
                 ]
             ));
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            toast.success('¡Se agrego el producto con éxito!', { autoClose: 3000 });
         }
 
         
@@ -61,7 +101,8 @@ export const CartProvider = ({children}) => {
                         setCartItems(newProduct);
                     }else{                        
                         withReactContent(Swal).fire({
-                            title: <i>Producto sin Stock</i>,
+                            title: <i>Stock</i>,
+                            allowOutsideClick: false,
                             html: `Producto sin Stock : <strong>${snapshot.data().nombre}</strong> </br> Stock maximo permitido: <strong>${snapshot.data().stock}</strong>`
                           })
                     }

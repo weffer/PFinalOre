@@ -4,11 +4,9 @@ import { getImageURL } from "../../utils/image-util";
 import { useProductDetail } from "../../Hooks/useProductDetail";
 import { useProductCount } from "../../Hooks/useProductCount";
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from "react-router-dom";
-
-import confetti from 'canvas-confetti'
 
 import { useCart } from "../../Hooks/useCart";
 
@@ -23,20 +21,9 @@ function ItemListDetail() {
 
 
   const handleSubmit = (event, detail)=> {
-    event.preventDefault();
-    if(count === 0){
-        return toast.error('¡Debe agregar al menos 1 producto!', { autoClose: 3000 })        
-    }
+    event.preventDefault();    
     //agregando item al contexto
     addItem({ detail, count });
-
-    confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-    });
-    
-    toast.success('¡Se agrego el producto con éxito!', { autoClose: 3000 });
   }
 
   return (   
@@ -180,12 +167,18 @@ function ItemListDetail() {
                                 </>
                             ) :
                             (
-                                <input
-                                    type="submit"
-                                    value="Agregar"
-                                    className="btn btn-primary px-4 text-white fw-bold"
-                                    disabled={detail.stock === 0 ? 'disabled' : ''}
-                                />
+                                <>
+                                    <input
+                                        type="submit"
+                                        value="Agregar"
+                                        className="btn btn-primary px-4 text-white fw-bold"
+                                        disabled={detail.stock === 0 ? 'disabled' : ''}
+                                    />
+                                     {detail.stock === 0 && 
+                                     (<Link to={'/'} className="btn text-bg-dark mt-2 fw-bold">
+                                        Seguir comprando
+                                    </Link>)}
+                                </>
                             )
                         }
                         
