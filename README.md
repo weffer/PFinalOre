@@ -15,7 +15,7 @@ Jefferson Ore.
 Este proyecto es un carrito de compras realizado con **react**
 
 ## Funcionalidades del proyecto
-Este proyecto permite simular una compra de productos de escritorio.
+Este proyecto permite simular una compra de productos de escritorio agregar distintos tipos de productos al carrito, eliminar y actualizar dependiendo del stock.
 
 ## Como inicializar el proyecto
 - Ingresar a la terminal
@@ -32,12 +32,14 @@ Este proyecto permite simular una compra de productos de escritorio.
 > VITE_FIREBASE_MESSAGING_SENDER_ID = ""\
 > VITE_FIREBASE_APP_ID = ""
 
-- En caso se tenga problemas enviar con correo del desarrollador : [correo](jeffer.ore@gmail.com)
+- En caso se tenga problemas enviar un correo al desarrollador : [correo](jeffer.ore@gmail.com)
 
 ## Pantallas de la aplicacion
-![alt text](chrome_UW78B2wRJJ.png)
-![alt text](chrome_6HDZBx0J6V.png)
-![alt text](chrome_SS225hHS5Z.png)
-![alt text](chrome_csTkZ3FhXj.png)
-![alt text](chrome_mKVote3m2w.png)
-![alt text](chrome_Xz32vVdNCR.png)
+![alt text](chrome_bF15b9Wc7A.png)
+![alt text](chrome_y909OJAW7A.png)
+![alt text](chrome_uf1ZPgxxDk.png)
+![alt text](chrome_i2GKtGmnUf.png)
+![alt text](chrome_5xVIBlNGMW.png)
+![alt text](chrome_GmuASoBdwR.png)
+![alt text](chrome_OgGGeVibst.png)
+![alt text](chrome_sn5zbwMHbK.png)
