@@ -84,10 +84,11 @@ const Checkout = () => {
             clear();
 
             withReactContent(Swal).fire({
-              title: <i>Gracias por su compra</i>,
+              title: "Gracias por su compra",
+              icon: 'success',
               allowOutsideClick: false,
-              allowEscapeKey: false,
-              html: `Su Nro de Orden es : <strong>${docRef.id}</strong>`,              
+              allowEscapeKey: false,              
+              html: `Su Nro de Orden es : <strong>${docRef.id}</strong>`,
               preConfirm: () => { 
                 window.location.href = '/';
               },

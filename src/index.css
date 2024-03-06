@@ -1,7 +1,11 @@
+html{
+  font-family: "Roboto", sans-serif;
+}
+
 body {
   background-color: #f8f9fa;
   color: #00111e;
-  font-family: system-ui;
+  font-family: "Roboto", sans-serif;
 }
 
 .text-primary {

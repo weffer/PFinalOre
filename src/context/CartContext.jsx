@@ -40,7 +40,8 @@ export const CartProvider = ({children}) => {
                         toast.success('¡Se agrego el producto con éxito!', { autoClose: 3000 });
                     }else{
                         withReactContent(Swal).fire({
-                            title: <i>Stock</i>,
+                            title: "Stock",
+                            icon: 'warning',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
                             html: `Producto sin Stock : <strong>${snapshot.data().nombre}</strong> </br> Stock maximo permitido: <strong>${snapshot.data().stock}</strong> </br>
@@ -73,8 +74,25 @@ export const CartProvider = ({children}) => {
         
     }
 
-    const removeItem = itemid => {
-        setCartItems(oldProduct => oldProduct.filter(item => item.id !== itemid));
+    const removeItem = itemid => {       
+        withReactContent(Swal).fire({
+            title: '¿Estás seguro?',
+            text: '¡Esta acción no se puede deshacer!',
+            icon: 'warning',
+            showCancelButton: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminarlo',
+            cancelButtonText: 'Cancelar'            
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire('Eliminado', 'El producto ha sido eliminado', 'success');
+                setCartItems(oldProduct => oldProduct.filter(item => item.id !== itemid));
+            }
+        });
+        
     }
 
     const clear = () => {
@@ -96,7 +114,8 @@ export const CartProvider = ({children}) => {
                         setCartItems(newProduct);
                     }else{                        
                         withReactContent(Swal).fire({
-                            title: <i>Stock</i>,
+                            title: "Stock",
+                            icon: 'warning',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
                             html: `Producto sin Stock : <strong>${snapshot.data().nombre}</strong> </br> Stock maximo permitido: <strong>${snapshot.data().stock}</strong>`
@@ -120,7 +139,23 @@ export const CartProvider = ({children}) => {
                 newProduct[productIndex].cantidad -= count;
                 setCartItems(newProduct);
             }else{
-                setCartItems(oldProduct => oldProduct.filter(item => item.id !== id));
+                withReactContent(Swal).fire({
+                    title: '¿Estás seguro?',
+                    text: '¡Esta acción no se puede deshacer!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminarlo',
+                    cancelButtonText: 'Cancelar'            
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire('Eliminado', 'El producto ha sido eliminado', 'success');                        
+                        setCartItems(oldProduct => oldProduct.filter(item => item.id !== id));
+                    }
+                });                
             }
             
         }
