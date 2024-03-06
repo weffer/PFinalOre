@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const CartDetail = () => {
 
   //llamando al customHook que tiene la referencia al contexto
-  const { cartItems,removeItem } = useCart();
+  const { cartItems,removeItem,updateIncremetProduct,updateDecrementProduct } = useCart();
 
   function handleClickDelete({id}){      
     removeItem(id);
@@ -33,11 +33,12 @@ const CartDetail = () => {
                 </Link>                
               </h5>
               <p>Precio: ${item.precio}</p>
-              <p>Cantidad: {item.cantidad}</p>
+              
+              <p>Cantidad: <button className="btn btn-danger btn-sm" onClick={()=> updateDecrementProduct(item.id, 1)}>-</button><strong className="m-1">{item.cantidad}</strong><button className="btn btn-success btn-sm" onClick={()=> updateIncremetProduct(item.id, 1)}>+</button></p>              
               <p>${item.precio * item.cantidad}</p>
             </div>
             <div className="col-auto">                            
-                <button className="deleteCard border-0 bg-transparent" onClick={() => handleClickDelete(item)}>
+                <button className="deleteCard border-0 bg-transparent" onClick={() => handleClickDelete(item)} title="Eliminar producto">
                   <i className="bi bi-trash eliminar"></i>
                 </button>                            
             </div>

@@ -1,5 +1,11 @@
 import {createContext, useEffect, useState} from "react";
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+import { doc , getDoc } from "firebase/firestore";
+import { db } from "../firebase/config"
+
 const cartInitial = JSON.parse(window.localStorage.getItem('cart')) || [];
 
 export const CartContext = createContext();
@@ -40,6 +46,48 @@ export const CartProvider = ({children}) => {
         setCartItems([])
     }
 
+    const updateIncremetProduct =(id, count) => {        
+        const productIndex =cartItems.findIndex(item => item.id === id);
+        if(productIndex >= 0)
+        {
+            const productoRef = doc(db, "productos", id);
+            getDoc(productoRef).then((snapshot) => {
+                if(snapshot.exists()){
+                    const newProduct = [...cartItems];
+                    
+                    if(newProduct[productIndex].cantidad + count <= snapshot.data().stock)
+                    {
+                        newProduct[productIndex].cantidad += count;
+                        setCartItems(newProduct);
+                    }else{                        
+                        withReactContent(Swal).fire({
+                            title: <i>Producto sin Stock</i>,
+                            html: `Producto sin Stock : <strong>${snapshot.data().nombre}</strong> </br> Stock maximo permitido: <strong>${snapshot.data().stock}</strong>`
+                          })
+                    }
+                }
+            }).catch((error) => {
+            console.error("Error al obtener el documento:", error);
+            });
+
+            
+        }
+    }
+
+    const updateDecrementProduct =(id, count) => {
+        const productIndex =cartItems.findIndex(item => item.id === id);
+        if(productIndex >= 0)
+        {
+            const newProduct = [...cartItems];
+            if(newProduct[productIndex].cantidad > 1){
+                newProduct[productIndex].cantidad -= count;
+                setCartItems(newProduct);
+            }else{
+                setCartItems(oldProduct => oldProduct.filter(item => item.id !== id));
+            }
+            
+        }
+    }
 
     useEffect(()=> {
         //para agregar el total al widget
@@ -65,7 +113,9 @@ export const CartProvider = ({children}) => {
             removeItem,
             clear,
             shoppingCartCount,
-            totalPrice
+            totalPrice,
+            updateIncremetProduct,
+            updateDecrementProduct
         }}>
             {children}
         </CartContext.Provider>
