@@ -42,6 +42,7 @@ export const CartProvider = ({children}) => {
                         withReactContent(Swal).fire({
                             title: <i>Stock</i>,
                             allowOutsideClick: false,
+                            allowEscapeKey: false,
                             html: `Producto sin Stock : <strong>${snapshot.data().nombre}</strong> </br> Stock maximo permitido: <strong>${snapshot.data().stock}</strong> </br>
                                    Ya tienes agregado el producto <strong>${snapshot.data().nombre}</strong> en el carrito, con la cantidad de : <strong>${newProduct[productIndex].cantidad}</strong>.</br>
                                    ${(snapshot.data().stock - (newProduct[productIndex].cantidad + count)) < 0 ? 'La cantidad perimitada para agregar es : <strong>' + (snapshot.data().stock - (newProduct[productIndex].cantidad)) + '</strong>' : '' } `
@@ -97,6 +98,7 @@ export const CartProvider = ({children}) => {
                         withReactContent(Swal).fire({
                             title: <i>Stock</i>,
                             allowOutsideClick: false,
+                            allowEscapeKey: false,
                             html: `Producto sin Stock : <strong>${snapshot.data().nombre}</strong> </br> Stock maximo permitido: <strong>${snapshot.data().stock}</strong>`
                           })
                     }
