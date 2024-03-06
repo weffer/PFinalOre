@@ -51,12 +51,6 @@ export const CartProvider = ({children}) => {
             }).catch((error) => {
                 console.error("Error al obtener el documento:", error);
             });
-
-            /*
-            const newProduct = [...cartItems];
-            newProduct[productIndex].cantidad += count;
-            setCartItems(newProduct);
-            */
         }else{
             setCartItems(oldProduct => (
                 [
